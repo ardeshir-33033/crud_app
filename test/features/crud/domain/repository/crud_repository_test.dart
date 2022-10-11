@@ -27,7 +27,7 @@ void main() {
 
   test("should get users", () async {
     when(mockCrudRepository.getUsers())
-        .thenAnswer((realInvocation) async => tUserList);
+        .thenAnswer((_) async => tUserList);
 
     final result = await useCase(null);
 
