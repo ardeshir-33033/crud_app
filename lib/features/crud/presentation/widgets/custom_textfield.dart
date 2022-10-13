@@ -3,14 +3,24 @@ import 'package:flutter/material.dart';
 import '../../../../core/consts/constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
-    Key? key,
-    required this.hint,
-    required this.textEditingController,
-  }) : super(key: key);
+  CustomTextField(
+      {Key? key,
+      required this.hint,
+      required this.textEditingController,
+      this.keyboardType = TextInputType.text,
+      this.readOnly = false,
+      this.onTap,
+      this.validator,
+      this.icon})
+      : super(key: key);
 
   final TextEditingController textEditingController;
   final String hint;
+  final bool readOnly;
+  final TextInputType keyboardType;
+  final Function? onTap;
+  final String? Function(String?)? validator;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +30,16 @@ class CustomTextField extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 12,
         child: Center(
           child: TextFormField(
+            readOnly: readOnly,
             controller: textEditingController,
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            onTap: () {
+              if (onTap != null) {
+                onTap!();
+              }
+            },
             decoration: InputDecoration(
+              prefixIcon: icon,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               focusedBorder: OutlineInputBorder(
@@ -35,13 +52,7 @@ class CustomTextField extends StatelessWidget {
                   borderSide: const BorderSide(color: Colors.red)),
               hintText: hint,
             ),
-            onSaved: (String? value) {
-              // This optional block of code can be used to run
-              // code when the user saves the form.
-            },
-            validator: (String? value) {
-              return null;
-            },
+            validator: validator,
           ),
         ),
       ),

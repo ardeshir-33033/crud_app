@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.1
   flutter_slidable: ^2.0.0
+  country_code_picker: ^2.0.2
+
+  #flutter version of defined repo in readme
+  phone_number: ^1.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   mockito: ^5.3.1
